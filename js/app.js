@@ -24,6 +24,21 @@ const inviteStudentButton = document.getElementById('inviteStudentButton');
 
 addProjectButton.addEventListener('click', e => {
   e.preventDefault(); //Don't refresh page
+  addToProjectList();
+});
+
+projectList.addEventListener('click', e => {
+  if(e.target.classList.contains("plus-icon")){
+    e.target.parentNode.nextElementSibling.classList.toggle("hidden");
+    
+  }
+});
+
+inviteStudentButton.addEventListener('click', e => {});
+
+closeIcon.addEventListener('click', () => {});
+
+function addToProjectList() {
   const li = document.createElement("LI");
   li.innerHTML = `
           <div class="project-header flex">
@@ -38,17 +53,5 @@ addProjectButton.addEventListener('click', e => {
           <p class="project-info hidden">${projectDetailsInput.value}</p>
   `;
   li.classList.add("project");
-
   projectList.append(li);
-});
-
-projectList.addEventListener('click', e => {
-  if(e.target.classList.contains("plus-icon")){
-    e.target.parentNode.nextElementSibling.classList.toggle("hidden");
-    
-  }
-});
-
-inviteStudentButton.addEventListener('click', e => {});
-
-closeIcon.addEventListener('click', () => {});
+}
