@@ -21,9 +21,33 @@ const studentProjectSelect = document.getElementById('projectSelect');
 const inviteStudentButton = document.getElementById('inviteStudentButton');
 
 // Event Listeners
-addProjectButton.addEventListener('click', e => {});
 
-projectList.addEventListener('click', e => {});
+addProjectButton.addEventListener('click', e => {
+  e.preventDefault(); //Don't refresh page
+  const li = document.createElement("LI");
+  li.innerHTML = `
+          <div class="project-header flex">
+            <h3 class="project-name">${projectNameInput.value}</h3>
+            <img class="plus-icon pointer" src="icons/plus-icon.svg" alt="Plus Icon Expand Details">
+            <ul class="project-langs flex">
+            ${projectHTMLCheckbox.checked ? '<li class="project-lang"><img class="html" src="icons/html5.svg" alt="HTML5 Logo"></li>' : ""}
+            ${projectCSSCheckbox.checked ? '<li class="project-lang"><img class="css" src="icons/css3.svg" alt="CSS3 Logo"></li>' : ""}
+            ${projectJSCheckbox.checked ? '<li class="project-lang"><img class="js" src="icons/javascript.svg" alt="JavaScript Logo"></li>' : ""}
+            </ul>
+          </div>
+          <p class="project-info hidden">${projectDetailsInput.value}</p>
+  `;
+  li.classList.add("project");
+
+  projectList.append(li);
+});
+
+projectList.addEventListener('click', e => {
+  if(e.target.classList.contains("plus-icon")){
+    e.target.parentNode.nextElementSibling.classList.toggle("hidden");
+    
+  }
+});
 
 inviteStudentButton.addEventListener('click', e => {});
 
