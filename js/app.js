@@ -39,10 +39,11 @@ inviteStudentButton.addEventListener('click', e => {});
 closeIcon.addEventListener('click', () => {});
 
 function addToProjectList() {
+  const projectName = projectNameInput.value;
   const li = document.createElement("LI");
   li.innerHTML = `
           <div class="project-header flex">
-            <h3 class="project-name">${projectNameInput.value}</h3>
+            <h3 class="project-name">${projectName}</h3>
             <img class="plus-icon pointer" src="icons/plus-icon.svg" alt="Plus Icon Expand Details">
             <ul class="project-langs flex">
             ${projectHTMLCheckbox.checked ? '<li class="project-lang"><img class="html" src="icons/html5.svg" alt="HTML5 Logo"></li>' : ""}
@@ -54,4 +55,12 @@ function addToProjectList() {
   `;
   li.classList.add("project");
   projectList.append(li);
+  addProjectToSelect(projectName);
+}
+
+function addProjectToSelect(projectName) {
+  const option = document.createElement('OPTION');
+  option.innerText = projectName;
+  option.setAttribute("value", projectName.replace(/\s/g, ''));
+  studentProjectSelect.append(option);
 }
