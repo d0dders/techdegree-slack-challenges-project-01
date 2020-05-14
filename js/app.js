@@ -2,7 +2,7 @@
   Variables
 ***************************************************** */
 // Alert Notification Banner
-const alert = document.getElementById('notification');
+const alertBanner = document.getElementById('notification');
 const closeIcon = document.querySelector('.close-icon');
 // Projects list UL
 const projectList = document.getElementById('projectList');
@@ -24,7 +24,9 @@ const inviteStudentButton = document.getElementById('inviteStudentButton');
 
 addProjectButton.addEventListener('click', e => {
   e.preventDefault(); //Don't refresh page
-  addToProjectList();
+  if (validateForm()){
+    addToProjectList();
+  }
 });
 
 projectList.addEventListener('click', e => {
@@ -58,6 +60,40 @@ function addToProjectList() {
   addProjectToSelect(projectName);
   resetForm();
 }
+
+function validateForm() {
+  let notificationText = "Project was successfully added";
+  let success = true
+  if (projectNameInput.value == "") {
+    notificationText = "Your project must have a name";
+    success = false;
+  } else if(projectDetailsInput.value =="") {
+    notificationText = "Your project must incude details";
+    success = false;
+  } else if(!projectHTMLCheckbox.checked && !projectCSSCheckbox.checked && !projectJSCheckbox.checked) {
+    notificationText = "You must select at least one language";
+    success = false;
+  }
+  displayNotification(notificationText, success);
+  return success;
+}
+
+function displayNotification(text, success) {
+  alertBanner.firstElementChild.firstElementChild.innerText = text;
+  if(success){
+    alertBanner.classList.add('success');
+    alertBanner.classList.remove('warning');
+  } else {
+    alertBanner.classList.add('warning');
+    alertBanner.classList.remove('success');
+  }
+  alertBanner.classList.remove('hidden');
+}
+
+closeIcon.addEventListener('click', () => {
+  alertBanner.classList.remove('success', 'warning');
+  alertBanner.classList.add('hidden');
+});
 
 function addProjectToSelect(projectName) {
   const option = document.createElement('OPTION');
