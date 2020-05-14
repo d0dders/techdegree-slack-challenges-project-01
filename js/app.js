@@ -56,6 +56,7 @@ function addToProjectList() {
   li.classList.add("project");
   projectList.append(li);
   addProjectToSelect(projectName);
+  resetForm();
 }
 
 function addProjectToSelect(projectName) {
@@ -63,4 +64,13 @@ function addProjectToSelect(projectName) {
   option.innerText = projectName;
   option.setAttribute("value", projectName.replace(/\s/g, ''));
   studentProjectSelect.append(option);
+}
+
+function resetForm() {
+projectNameInput.value = "";
+projectHTMLCheckbox.checked = true;
+projectCSSCheckbox.checked = true;
+projectJSCheckbox.checked = false;
+projectDetailsInput.value = "";
+projectNameInput.focus();
 }
