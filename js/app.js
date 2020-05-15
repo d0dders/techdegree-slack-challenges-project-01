@@ -29,6 +29,24 @@ addProjectButton.addEventListener('click', e => {
   }
 });
 
+inviteStudentButton.addEventListener('click', e => {
+  e.preventDefault();
+  let success = false;
+  let notificationText = "";
+  const studentName = studentNameInput.value;
+  const projectName = studentProjectSelect.value;
+  if (studentName == "") {
+    notificationText = "You must enter a student name";
+  } else if(projectName == "") {
+    notificationText = "You must select a project";
+  } else {
+    // if we were doing something we'd do it here!
+    notificationText = `${studentName} was added to ${projectName}`;
+    success = true;
+  }
+  displayNotification(notificationText, success);
+});
+
 projectList.addEventListener('click', e => {
   if(e.target.classList.contains("plus-icon")){
     e.target.parentNode.nextElementSibling.classList.toggle("hidden");
