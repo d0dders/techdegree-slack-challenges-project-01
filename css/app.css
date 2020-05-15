@@ -207,6 +207,8 @@ footer {
   border-radius: 0 0 4px 4px;
   text-align: center;
   font-size: 18px;
+  position: sticky;
+  top: 0;
 }
 .alert-banner > .container {
   max-width: 900px;
